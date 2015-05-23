@@ -1,0 +1,22 @@
+{
+  "name": "sjcl-extended",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  
+  "devDependencies": {
+    "assert-diff": "^1.0.1",
+    "istanbul": "~0.3.5",
+    "mocha": "~2.1.0"
+  },
+  
+  "scripts": {
+    "test": "istanbul test _mocha",
+    "postinstall": "cd node_modules/sjcl; ./configure --with-all --compress=none; make"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sjcl": "^1.0.3"
+  }
+}
