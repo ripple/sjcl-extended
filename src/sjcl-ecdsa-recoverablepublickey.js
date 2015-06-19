@@ -240,8 +240,12 @@ sjcl.ecc.ecdsa.secretKey.prototype.signWithRecoverablePublicKey = function(
     throw new sjcl.exception.invalid('hash. Must be a bitArray');
   }
 
+  if (typeof k_for_testing === 'string') {
+    k_for_testing = sjcl.bn.fromBits((sjcl.codec.hex.toBits(k_for_testing)));
+  }
+
   // Sign hash with standard, canonicalized method
-  var standard_signature = self.sign(hash_bits, paranoia, k_for_testing);
+  var standard_signature = self.sign(hash_bits, paranoia, undefined, k_for_testing);
   var canonical_signature = self.canonicalizeSignature(standard_signature);
 
   // Extract r and s signature components from canonical signature
