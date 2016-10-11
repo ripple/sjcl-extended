@@ -43,7 +43,9 @@ describe('ECDSA signing with recoverable public key', function(){
 
         var pub_val_point = secret_key._curve.G.mult(secret_key._exponent);
         var public_key = new sjcl.ecc.ecdsa.publicKey(curve, pub_val_point);
-        var hash = hash_function(message);
+        var hash = sjcl.bitArray.clamp(
+          hash_function(message), secret_key._curveBitLength
+        ); 
 
         var recoverable_signature = secret_key.signWithRecoverablePublicKey(hash, 0, random_value);
         var recovered_public_key = sjcl.ecc.ecdsa.publicKey.recoverFromSignature(hash, recoverable_signature);
